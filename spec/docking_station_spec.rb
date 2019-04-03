@@ -17,11 +17,17 @@ describe DockingStation do
 
  it 'docks bike' do
  bike = Bike.new
- expect(subject.dock(bike)).to eq bike
+ expect(subject.dock(bike)).to eq [bike]
+end
+
+it 'raises error if full' do
+20.times { subject.dock Bike.new }
+  expect { subject.dock Bike.new }.to raise_error 'Docking station full'
 end
 
  it 'raises an error when there are no bikes available' do
  expect { subject.release_bike }.to raise_error 'No bikes available'
   end
+
 
 end
